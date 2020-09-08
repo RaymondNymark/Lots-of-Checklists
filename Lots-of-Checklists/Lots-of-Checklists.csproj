@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,9 +75,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Checklist.cs" />
-    <Compile Include="ChecklistContext.cs" />
-    <Compile Include="ChecklistItem.cs" />
+    <Compile Include="Checklist.cs">
+      <DependentUpon>ChecklistsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChecklistsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChecklistsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChecklistsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChecklistsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChecklistsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChecklistsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>ChecklistsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -99,6 +119,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="ChecklistsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChecklistsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ChecklistsModel.edmx.diagram">
+      <DependentUpon>ChecklistsModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -107,6 +134,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChecklistsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChecklistsModel.edmx</DependentUpon>
+      <LastGenOutput>ChecklistsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ChecklistsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChecklistsModel.edmx</DependentUpon>
+      <LastGenOutput>ChecklistsModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

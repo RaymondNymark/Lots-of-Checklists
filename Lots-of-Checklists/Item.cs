@@ -12,18 +12,13 @@ namespace Lots_of_Checklists
     using System;
     using System.Collections.Generic;
     
-    public partial class Checklist
+    public partial class Item
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Checklist()
-        {
-            this.Item = new HashSet<Item>();
-        }
-    
-        public int ChecklistID { get; set; }
+        public int ItemID { get; set; }
         public string Description { get; set; }
+        public bool IsChecked { get; set; }
+        public int ChecklistID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Item> Item { get; set; }
+        public virtual Checklist Checklist { get; set; }
     }
 }
