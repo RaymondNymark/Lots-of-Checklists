@@ -23,6 +23,19 @@ namespace Lots_of_Checklists
         public MainWindow()
         {
             InitializeComponent();
+            using (var ctx = new ChecklistContext())
+            {
+                var checklist1 = new Checklist() { _checkListName = "Epic Checklist" };
+                var checklistitem1 = new ChecklistItem() { _checkListItemName = "Get milk" };
+                var checklistitem2 = new ChecklistItem() { _checkListItemName = "Get bread" };
+
+
+
+                ctx.ChecklistItems.Add(checklistitem1);
+                ctx.ChecklistItems.Add(checklistitem2);
+
+                ctx.SaveChanges();
+            };
         }
     }
 }
