@@ -67,6 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="InsideChecklist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,6 +96,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="InsideChecklist.xaml.cs">
+      <DependentUpon>InsideChecklist.xaml</DependentUpon>
     </Compile>
     <Compile Include="Item.cs">
       <DependentUpon>ChecklistsModel.tt</DependentUpon>
