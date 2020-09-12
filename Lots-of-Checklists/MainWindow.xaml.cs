@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Lots_of_Checklists
 {
@@ -11,8 +13,13 @@ namespace Lots_of_Checklists
     {
         public MainWindow()
         {
-            DataContext = this;
             InitializeComponent();
+
+            List<Checklist> Ichecklist = new List<Checklist>();
+
+            var dbContext = new ChecklistsEntities();
+            Master.ItemsSource = dbContext.Checklist.ToList();
+
         }
 
 
