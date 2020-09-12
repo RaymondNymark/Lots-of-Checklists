@@ -6,5 +6,22 @@
         xmlns:local="clr-namespace:Lots_of_Checklists"
         mc:Ignorable="d"
         Title="Lots of Checklists" Height="700" Width="450">
-    <Grid/>
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,10,0,0" Height="70" Width="422" TextAlignment="Center" FontSize="24" Foreground="White" FontFamily="Tahoma"><Run Foreground="#FF5F440B" Text="Checklists"/></TextBlock>
+
+        <ListBox x:Name="Master" Margin="10,36,10,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Description}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
 </Window>
