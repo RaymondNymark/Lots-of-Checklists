@@ -10,20 +10,20 @@
 namespace Lots_of_Checklists
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Checklist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Checklist()
         {
-            this.Item = new HashSet<Item>();
+            this.Item = new ObservableCollection<Item>();
         }
     
         public int ChecklistID { get; set; }
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Item> Item { get; set; }
+        public virtual ObservableCollection<Item> Item { get; set; }
     }
 }
