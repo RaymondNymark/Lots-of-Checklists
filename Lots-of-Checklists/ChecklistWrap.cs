@@ -11,11 +11,11 @@ namespace Lots_of_Checklists
     public class ChecklistWrap : Checklist, INotifyPropertyChanged
     {
         private string _description;
-        public new string Description
-        {
-            get => _description;
-            set => SetProperty(ref _description, value);
-        }
+        //public new string Description
+        //{
+        //    get => _description;
+        //    set => SetProperty(ref _description, value);
+        //}
 
         // TODO: Implement ObservableItemCollection property. Currently testing main attributes to make sure it works.
         
