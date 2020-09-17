@@ -10,7 +10,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,10,0,0" Height="70" Width="422" TextAlignment="Center" FontSize="24" Foreground="White" FontFamily="Tahoma"><Run Foreground="#FF5F440B" Text="Checklists"/></TextBlock>
 
-        <ListBox x:Name="Master" Margin="10,36,10,10">
+        <ListBox x:Name="Master" Margin="10,36,10,59" ItemsSource="{Binding CollectionSix}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -22,6 +22,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
+        <Button x:Name="DeleteItemButton" Content="Delete Item" HorizontalAlignment="Left" Margin="305,630,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Path=DeleteSelectedChecklistCommand}"/>
+        <Button Content="NewChecklist" Command="{Binding Path=AddNewChecklistCommand}" HorizontalAlignment="Left" Margin="50,630,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
