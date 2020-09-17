@@ -12,6 +12,11 @@ namespace Lots_of_Checklists
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {
             if (!EqualityComparer<T>.Default.Equals(field, newValue))
