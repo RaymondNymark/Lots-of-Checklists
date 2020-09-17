@@ -9,24 +9,17 @@ namespace Lots_of_Checklists
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
+            var viewModel = new MainWindowViewModel();
+            DataContext = viewModel;
             InitializeComponent();
 
-            List<Checklist> Ichecklist = new List<Checklist>();
 
-            var dbContext = new ChecklistsEntities();
-            Master.ItemsSource = dbContext.Checklist.ToList();
-
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); 
+            // This line here caused me a great deal of headache.
+            //Master.ItemsSource = viewModel.BetterChecklistCollection;
         }
 
     }
