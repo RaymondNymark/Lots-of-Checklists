@@ -28,8 +28,22 @@ namespace Lots_of_Checklists
 
 
         #region Delegate Command Region
+        //-----Temporary unimplemented methods-----
 
-        // Temporary unimplemented methods.
+        // Insert
+        private readonly DelegateCommand _addChecklistCommand;
+        private readonly DelegateCommand _addItemToChecklistCommand;
+        // Remove
+        private readonly DelegateCommand _removeChecklistCommand;
+        private readonly DelegateCommand _removeItemFromChecklistCommand;
+        // Update
+        private readonly DelegateCommand _renameSelectedObjectCommand;
+        // TODO: Implement drag and drop class to re-order items.
+
+        // View-related
+        private readonly DelegateCommand _openChecklistCommand;
+        private readonly DelegateCommand _closeChecklistCommand;
+
 
 
 
