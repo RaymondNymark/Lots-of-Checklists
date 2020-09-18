@@ -12,35 +12,25 @@ namespace Lots_of_Checklists
     public class MainWindowViewModel : ViewModelBase
     {
  
-        private static ChecklistsEntities Context = new ChecklistsEntities();
+        private static ChecklistsEntities _dbContext = new ChecklistsEntities();
 
+        // For some reason, this needs to be declared before anything will work. Strange!
+        public ObservableCollection<Checklist> ChecklistCollection = new ObservableCollection<Checklist>(_dbContext.Checklist);
 
-
-        public ObservableCollection<Checklist> ChecklistCollection = new ObservableCollection<Checklist>(Context.Checklist);
-
-        
-
-       
-
-        
-        public virtual ObservableCollection<Checklist> GetSynchedItems()
+        // Adding anything to this or directly to _dbContext will refresh it. Neat!
+        public ObservableCollection<Checklist> CurrentCollectionSource
         {
-            return Context.Checklist.Local;
-        }
-        public ObservableCollection<Checklist> CollectionSix
-        {
-            get => Context.Checklist.Local;
+            get => _dbContext.Checklist.Local;
         }
 
 
 
-        
 
 
+        #region Delegate Command Region
 
+        // Temporary unimplemented methods.
 
-
-        
 
 
         // Add new checklistCommand
@@ -50,6 +40,14 @@ namespace Lots_of_Checklists
         private void OnAddNewChecklist(object commandParameter)
         {
             // TODO: Implement this.
+            // Both of these implementations work.
+            using (_dbContext)
+            {
+                _dbContext.Checklist.Add(new Checklist { Description = "Forbidden Checklist😃" });
+                _dbContext.SaveChanges();
+            }
+
+            //CurrentCollectionSource.Add(new Checklist { Description = "Forbidden Checklist" });
         }
 
 
@@ -84,7 +82,7 @@ namespace Lots_of_Checklists
         }
 
 
-
+        #endregion
 
 
         #region Temporary legacy code region TODO: Remove this.
