@@ -7,16 +7,27 @@
         mc:Ignorable="d"
         Title="Lots of Checklists" Height="700" Width="450">
 
+    <Window.Resources>
+        <DataTemplate x:Name="InnerChecklistViewTemplate" DataType="{x:Type local:InsideChecklistViewModel}">
+            <local:InsideChecklistView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="165*"/>
             <ColumnDefinition Width="277*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,10,0,0" Height="70" Width="422" TextAlignment="Center" FontSize="24" Foreground="White" FontFamily="Tahoma" Grid.ColumnSpan="2"><Run Foreground="#FF5F440B" Text="Checklists"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,10,0,0" Height="70" Width="422" TextAlignment="Center" FontSize="24" Foreground="White" FontFamily="Tahoma" Grid.ColumnSpan="2" Grid.RowSpan="2"><Run Foreground="#FF5F440B" Text="Checklists"/></TextBlock>
         <ListBox x:Name="Master"
                  Margin="10,36,10,59"
                  ItemsSource="{Binding CurrentCollectionSource}"
                  SelectedItem="{Binding SelectedObject, Mode=TwoWay}" Grid.ColumnSpan="2"
+                 MouseDoubleClick="ListView_MouseDoubleClick" Grid.RowSpan="2"
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -29,8 +40,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="DeleteItemButton" Content="Delete Item" HorizontalAlignment="Left" Margin="140,630,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Path=DeleteSelectedChecklistCommand}" Grid.Column="1"/>
-        <Button Content="NewChecklist" Command="{Binding Path=AddNewChecklistCommand}" HorizontalAlignment="Left" Margin="50,630,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="DebugExecute" HorizontalAlignment="Left" Command="{Binding Path=DebugCommandExecute}" Margin="20,630,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+        <Button x:Name="DeleteItemButton" Content="Delete Item" HorizontalAlignment="Left" Margin="140,630,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Path=DeleteSelectedChecklistCommand}" Grid.Column="1" Grid.RowSpan="2"/>
+        <Button Content="NewChecklist" Command="{Binding Path=AddNewChecklistCommand}" HorizontalAlignment="Left" Margin="50,630,0,0" VerticalAlignment="Top" Width="75" Grid.RowSpan="2"/>
+        <Button Content="DebugExecute" HorizontalAlignment="Left" Command="{Binding Path=DebugCommandExecute}" Margin="20,630,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.RowSpan="2"/>
+        <Button Content="ChangeViewModel" HorizontalAlignment="Left" Margin="70,465,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+        <!-- <ContentControl Content="{Binding}"/> -->
+
     </Grid>
 </Window>
