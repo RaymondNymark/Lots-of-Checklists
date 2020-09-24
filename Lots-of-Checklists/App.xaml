@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Lots_of_Checklists"
+             xmlns:views="clr-namespace:Lots_of_Checklists.Views"
+             xmlns:viewmodels="clr-namespace:Lots_of_Checklists.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type viewmodels:OutsideViewModel}">
+            <views:OutsideView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:InsideViewModel}">
+            <views:InsideView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
