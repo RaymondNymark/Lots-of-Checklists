@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lots_of_Checklists
+namespace Lots_of_Checklists.Models
 {
     using System;
     using System.Collections.ObjectModel;
