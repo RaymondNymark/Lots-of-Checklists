@@ -67,44 +67,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChecklistWrap.cs" />
-    <Compile Include="ViewModelBase.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\InsideViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\OutsideViewModel.cs" />
+    <Compile Include="Views\InsideView.xaml.cs">
+      <DependentUpon>InsideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OutsideView.xaml.cs">
+      <DependentUpon>OutsideView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Checklist.cs">
+    <Compile Include="Models\Checklist.cs">
       <DependentUpon>ChecklistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChecklistsModel.Context.cs">
+    <Compile Include="Models\ChecklistsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChecklistsModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChecklistsModel.cs">
+    <Compile Include="Models\ChecklistsModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChecklistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChecklistsModel.Designer.cs">
+    <Compile Include="Models\ChecklistsModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs">
+    <Compile Include="Models\Item.cs">
       <DependentUpon>ChecklistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Views\InsideView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OutsideView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,11 +136,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ChecklistsModel.edmx">
+    <EntityDeploy Include="Models\ChecklistsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ChecklistsModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ChecklistsModel.edmx.diagram">
+    <None Include="Models\ChecklistsModel.edmx.diagram">
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -139,12 +153,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ChecklistsModel.Context.tt">
+    <Content Include="Models\ChecklistsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
       <LastGenOutput>ChecklistsModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ChecklistsModel.tt">
+    <Content Include="Models\ChecklistsModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
       <LastGenOutput>ChecklistsModel.cs</LastGenOutput>
@@ -152,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

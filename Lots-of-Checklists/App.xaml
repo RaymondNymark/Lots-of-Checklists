@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Lots_of_Checklists"
              xmlns:views="clr-namespace:Lots_of_Checklists.Views"
              xmlns:viewmodels="clr-namespace:Lots_of_Checklists.ViewModels"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Views\MainView.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
             <views:MainView/>

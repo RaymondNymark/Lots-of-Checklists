@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lots_of_Checklists.ViewModels
 {
-    class InsideViewModel
+    public class InsideViewModel : ViewModelBase
     {
     }
 }
