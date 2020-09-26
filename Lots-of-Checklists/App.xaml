@@ -6,6 +6,9 @@
              xmlns:viewmodels="clr-namespace:Lots_of_Checklists.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
+            <views:MainView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:OutsideViewModel}">
             <views:OutsideView/>
         </DataTemplate>
