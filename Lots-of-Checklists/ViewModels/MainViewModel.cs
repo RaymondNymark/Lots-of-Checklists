@@ -12,6 +12,7 @@ namespace Lots_of_Checklists.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        #region View navigation
         // Essential navigation for the views within this application. Navigates
         // between the Outside a checklist viewmodel and the inside checklist
         // viewmodel.
@@ -23,86 +24,60 @@ namespace Lots_of_Checklists.ViewModels
             set => SetProperty(ref _selectedViewModel, value);
         }
 
+        #endregion
 
-        private readonly DelegateCommand _displayInsideView;
-        public ICommand DisplayInsideView => _displayInsideView;
 
-        public MainViewModel()
+
+
+
+        #region Application wide ICommands
+
+        // ICommand template for this implementation. This one will always
+        // execute since CanExecuteFunc is always true.
+        public ICommand DebugCommand
         {
-            _displayInsideView = new DelegateCommand(OnDisplayInsideView);
-        }
-
-        private void OnDisplayInsideView(object commandParameter)
-        {
-            Console.WriteLine("WriteLineinConsole.");
-            SelectedViewModel = new InsideViewModel();
-        }
-
-
-        public class DelegateCommand : ICommand
-        {
-            private readonly Action<object> _executeAction;
-
-            public DelegateCommand(Action<object> executeAction)
+            get
             {
-                _executeAction = executeAction;
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => true,
+                    CommandAction = () =>
+                    {
+                        Console.WriteLine("DebugCommand executed.");
+                        SelectedViewModel = new InsideViewModel();
+                    }
+                };
             }
-
-            public void Execute(object parameter) => _executeAction(parameter);
-
-            public bool CanExecute(object parameter) => true;
-
-            public event EventHandler CanExecuteChanged;
         }
-
-
-
-
-
-
-
-
-
-
-        //public ICommand UpdateViewCommand { get; set; }
-
-        //public MainViewModel()
-        //{
-        //    UpdateViewCommand = new UpdateViewCommand(this);
-        //}
-
-
-        //public void OnChangeName(object commandParameter)
-        //{
-        //    SelectedViewModel = new InsideViewModel();
-        //}
-
-
-        //public MainViewModel()
-        //{
-        //    _debugCommand = new DelegateCommand(OnDebug);
-        //}
-
-        //private void OnDebug(object commandParameter)
-        //{
-        //    Console.WriteLine("OnDebugRan");
-        //    //SelectedViewModel = new InsideViewModel();
-        //}
-
-        //private readonly DelegateCommand _debugCommand;
-        //public ICommand DebugCommand => _debugCommand;
-
-        //public class DelegateCommand : ICommand
-        //{
-        //    private readonly Action<object> _executeAction;
-        //    public DelegateCommand(Action<object> executeAction)
-        //    {
-        //        _executeAction = executeAction;
-        //    }
-        //    public void Execute(object parameter) => _executeAction(parameter);
-        //    public bool CanExecute(object parameter) => true;
-        //    public event EventHandler CanExecuteChanged;
-        //}
+        #endregion
     }
 
+
+    /// <summary>
+    /// Simplistic delegate command implementation.  According to MVVM
+    /// standards, commands should be implemented in the viewModel. This
+    /// implementation is taken from the Toggle-Dark-Mode application with a few
+    /// adjustments.
+    /// </summary>
+    public class DelegateCommand : ICommand
+    {
+        public Action CommandAction { get; set; }
+        public Func<bool> CanExecuteFunc { get; set; }
+
+        public void Execute(object parameter)
+        {
+            CommandAction();
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return CanExecuteFunc == null || CanExecuteFunc();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+    }
 }
