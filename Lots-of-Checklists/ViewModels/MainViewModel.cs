@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lots_of_Checklists.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +24,6 @@ namespace Lots_of_Checklists.ViewModels
             get => _selectedViewModel;
             set => SetProperty(ref _selectedViewModel, value);
         }
-
         #endregion
 
 
