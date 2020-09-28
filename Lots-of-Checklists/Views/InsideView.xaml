@@ -9,12 +9,14 @@
     <Grid Background="Beige">
         <ListBox x:Name="InsideListBox"
                  Margin="10,36,10,59"
-                 ItemsSource="{Binding CurrentItemCollectionSource}">
+                 ItemsSource="{Binding ItemSource}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Description}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Content="Return" Command="{Binding DataContext.DebugCommandTwo, RelativeSource=
+    {RelativeSource AncestorType={x:Type local:MainView}}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </UserControl>
