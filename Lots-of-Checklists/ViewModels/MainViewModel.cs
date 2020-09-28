@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Lots_of_Checklists.ViewModels;
 
 namespace Lots_of_Checklists.ViewModels
 {
@@ -27,9 +28,6 @@ namespace Lots_of_Checklists.ViewModels
         #endregion
 
 
-
-
-
         #region Application wide ICommands
 
         // ICommand template for this implementation. This one will always
@@ -43,8 +41,32 @@ namespace Lots_of_Checklists.ViewModels
                     CanExecuteFunc = () => true,
                     CommandAction = () =>
                     {
-                        Console.WriteLine("DebugCommand executed.");
-                        SelectedViewModel = new InsideViewModel();
+                        try
+                        {
+                            Console.WriteLine("DebugCommand executed.");
+                            var newInsideView = new InsideViewModel((OutsideViewModel)SelectedViewModel);
+                            SelectedViewModel = newInsideView;
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            Console.WriteLine("NullReferenceException");
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand DebugCommandTwo
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => true,
+                    CommandAction = () =>
+                    {
+                        Console.WriteLine("DebugCommandTwo executed.");
+                        SelectedViewModel = new OutsideViewModel();
                     }
                 };
             }
