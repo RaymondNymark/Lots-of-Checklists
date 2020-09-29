@@ -9,16 +9,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <ListBox x:Name="OutsideListBox"
+        <ListView x:Name="OutsideListBox"
                  Margin="10,36,10,59"
                  ItemsSource="{Binding CurrentCollectionSource}"
                  SelectedItem="{Binding SelectedChecklist, Mode=TwoWay}">
-            <ListBox.ItemTemplate>
+
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Description}" />
+                    <TextBlock Text="{Binding Description}">
+                        <TextBlock.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DataContext.DoubleClickCommand, RelativeSource={RelativeSource AncestorType={x:Type views:MainView}}, Mode=OneWay}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.ItemTemplate>
+        </ListView>
         <Button Content="DebugButton" Command="{Binding DataContext.DebugCommand, RelativeSource=
     {RelativeSource AncestorType={x:Type views:MainView}}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
         <!--<Label HorizontalAlignment="Right" VerticalAlignment="Top" Width="1000" Content="{Binding SelectedChecklist, Mode=OneWay}"/>-->

@@ -30,6 +30,42 @@ namespace Lots_of_Checklists.ViewModels
 
         #region Application wide ICommands
 
+        /// <summary>
+        /// Command to open a specific checklist by double clicking on it in
+        /// OutsideView.
+        /// </summary>
+        public ICommand DoubleClickCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => true,
+                    CommandAction = () =>
+                    { 
+                        try
+                        {
+                            // TODO: Clean this up.  Fix bug that only lets you
+                            // click on text instead of whole row in
+                            // OutsideView.xaml
+                            SelectedViewModel = new InsideViewModel((OutsideViewModel)SelectedViewModel);
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            Console.WriteLine("NullReferenceException");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Exception encountered: ");
+                            Console.Write(e);
+                        }
+                    }
+                };
+            }
+        }
+
+        #region Debug ICommands
+
         // ICommand template for this implementation. This one will always
         // execute since CanExecuteFunc is always true.
         public ICommand DebugCommand
@@ -71,6 +107,8 @@ namespace Lots_of_Checklists.ViewModels
                 };
             }
         }
+        #endregion
+
         #endregion
     }
 
