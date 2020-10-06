@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LotsOfChecklistsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Checklists">
+          <Key>
+            <PropertyRef Name="ChecklistID" />
+          </Key>
+          <Property Name="ChecklistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entries">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ChecklistID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Entries_ToTable">
+          <End Role="Checklists" Type="Self.Checklists" Multiplicity="1" />
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklists">
+              <PropertyRef Name="ChecklistID" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="ChecklistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LotsOfChecklistsModelStoreContainer">
+          <EntitySet Name="Checklists" EntityType="Self.Checklists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entries" EntityType="Self.Entries" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Entries_ToTable" Association="Self.FK_Entries_ToTable">
+            <End Role="Checklists" EntitySet="Checklists" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LotsOfChecklistsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Checklists">
+          <Key>
+            <PropertyRef Name="ChecklistID" />
+          </Key>
+          <Property Name="ChecklistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Entries" Relationship="Self.FK_Entries_ToTable" FromRole="Checklists" ToRole="Entries" />
+        </EntityType>
+        <EntityType Name="Entries">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsChecked" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ChecklistID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Checklists" Relationship="Self.FK_Entries_ToTable" FromRole="Entries" ToRole="Checklists" />
+        </EntityType>
+        <Association Name="FK_Entries_ToTable">
+          <End Role="Checklists" Type="Self.Checklists" Multiplicity="1" />
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklists">
+              <PropertyRef Name="ChecklistID" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="ChecklistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LotsOfChecklistsContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Checklists" EntityType="Self.Checklists" />
+          <EntitySet Name="Entries" EntityType="Self.Entries" />
+          <AssociationSet Name="FK_Entries_ToTable" Association="Self.FK_Entries_ToTable">
+            <End Role="Checklists" EntitySet="Checklists" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LotsOfChecklistsModelStoreContainer" CdmEntityContainer="LotsOfChecklistsContext">
+          <EntitySetMapping Name="Checklists">
+            <EntityTypeMapping TypeName="LotsOfChecklistsModel.Checklists">
+              <MappingFragment StoreEntitySet="Checklists">
+                <ScalarProperty Name="ChecklistID" ColumnName="ChecklistID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entries">
+            <EntityTypeMapping TypeName="LotsOfChecklistsModel.Entries">
+              <MappingFragment StoreEntitySet="Entries">
+                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ChecklistID" ColumnName="ChecklistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

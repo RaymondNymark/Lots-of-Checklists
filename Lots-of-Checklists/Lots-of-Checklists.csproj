@@ -92,12 +92,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\ChecklistManager.cs" />
+    <Compile Include="ContainerConfig.cs" />
     <Compile Include="Core\ChecklistRepository.cs" />
-    <Compile Include="Core\DbContext.cs" />
-    <Compile Include="Core\IChecklistManager.cs" />
-    <Compile Include="Core\IChecklistRepository.cs" />
-    <Compile Include="Core\ItemManager.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\InsideViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
