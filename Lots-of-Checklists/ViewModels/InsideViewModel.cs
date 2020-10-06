@@ -10,14 +10,6 @@ namespace Lots_of_Checklists.ViewModels
 {
     public class InsideViewModel : ViewModelBase
     {
-        //private ChecklistsEntities _dbContext = new ChecklistsEntities();
-        //public ObservableCollection<Item> CurrentItemCollectionSource
-        //{
-        //    get => _dbContext.Checklist.FirstOrDefault(r => r.Description == "ChecklistOne").Item;
-        //}
-
-        //public ObservableCollection<Item> ItemCollection = new ObservableCollection<Item>(_selectedChecklist.Item);
-
         private ObservableCollection<Item> _itemSource;
         public ObservableCollection<Item> ItemSource
         {

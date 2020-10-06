@@ -64,6 +64,20 @@ namespace Lots_of_Checklists.ViewModels
             }
         }
 
+        public ICommand NewChecklistCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => false,
+                    CommandAction = () =>
+                    {
+                        // New Checklist
+                    }
+                };
+            }
+        }
         #region Debug ICommands
 
         // ICommand template for this implementation. This one will always
