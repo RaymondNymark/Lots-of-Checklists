@@ -94,6 +94,27 @@
     </ApplicationDefinition>
     <Compile Include="ContainerConfig.cs" />
     <Compile Include="Core\ChecklistRepository.cs" />
+    <Compile Include="Models\Checklists.cs">
+      <DependentUpon>LotsOfChecklistsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entries.cs">
+      <DependentUpon>LotsOfChecklistsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LotsOfChecklistsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LotsOfChecklistsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LotsOfChecklistsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LotsOfChecklistsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LotsOfChecklistsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LotsOfChecklistsModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\InsideViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -170,6 +191,13 @@
     <None Include="Models\ChecklistsModel.edmx.diagram">
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Models\LotsOfChecklistsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LotsOfChecklistsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\LotsOfChecklistsModel.edmx.diagram">
+      <DependentUpon>LotsOfChecklistsModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -189,6 +217,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ChecklistsModel.edmx</DependentUpon>
       <LastGenOutput>ChecklistsModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LotsOfChecklistsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LotsOfChecklistsModel.edmx</DependentUpon>
+      <LastGenOutput>LotsOfChecklistsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LotsOfChecklistsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LotsOfChecklistsModel.edmx</DependentUpon>
+      <LastGenOutput>LotsOfChecklistsModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
