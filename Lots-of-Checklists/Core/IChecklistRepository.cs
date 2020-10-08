@@ -4,6 +4,8 @@ namespace Lots_of_Checklists.Core
 {
     public interface IChecklistRepository
     {
-        Checklist Get(int checklistID);
+        void CreateNewChecklist(string name);
+        void DeleteChecklist(int checklistID);
+        Checklists Get(int checklistID);
     }
 }
