@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using static Lots_of_Checklists.ViewModels.MainViewModel;
 using Lots_of_Checklists.Models;
+using Lots_of_Checklists.Core;
+using Autofac;
 
 namespace Lots_of_Checklists.ViewModels
 {
@@ -21,6 +23,16 @@ namespace Lots_of_Checklists.ViewModels
             get => _dbContext.Checklist.Local;
         }
 
+        //public static ObservableCollection<Checklists> Checklistscollection = new ObservableCollection<Checklists>(container.BeginLifetimeScope().Resolve<IChecklistRepository>().GetChecklistsCollection());
+        //public static ObservableCollection<Checklists> ItemsSourceProperty
+        //{
+        //    get => container.BeginLifetimeScope().Resolve<IChecklistRepository>().GetChecklistsCollection();
+        //}
+
+
+        private IChecklistService _checklistService;
+        public ObservableCollection<Checklists> ChecklistsCollection { get; private set; }
+
 
         private Checklist _selectedChecklist;
         public Checklist SelectedChecklist
@@ -30,7 +42,27 @@ namespace Lots_of_Checklists.ViewModels
         }
 
 
-        
+
+
+        //private static Autofac.IContainer container;
+
+        public OutsideViewModel(IChecklistService checklistService)
+        {
+            
+
+                _checklistService = checklistService;
+            ChecklistsCollection = new ObservableCollection<Checklists>(_checklistService.Checklists);
+
+            //container = ContainerConfig.Configure();
+            //using (var scope = container.BeginLifetimeScope())
+            //{
+            //    var app = scope.Resolve<IChecklistRepository>();
+            //    Checklistscollection = new ObservableCollection<Checklists>(app.GetChecklistsDbSet());
+            //    ItemsSourceProperty = app.GetChecklistsCollection();
+            //}
+        }
+
+
         //#region Delegate Command Region
         ////-----Temporary unimplemented methods-----
 

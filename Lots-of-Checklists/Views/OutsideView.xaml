@@ -11,13 +11,13 @@
     <Grid Background="MistyRose">
         <ListView x:Name="OutsideListBox"
                  Margin="10,36,10,59"
-                 ItemsSource="{Binding CurrentCollectionSource}"
+                 ItemsSource="{Binding ChecklistsCollection}"
                  SelectedItem="{Binding SelectedChecklist, Mode=TwoWay}"
                  Background="White">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Description}">
+                    <TextBlock Text="{Binding Name}">
                         <TextBlock.InputBindings>
                             <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DataContext.DoubleClickCommand, RelativeSource={RelativeSource AncestorType={x:Type views:MainView}}, Mode=OneWay}"/>
                         </TextBlock.InputBindings>

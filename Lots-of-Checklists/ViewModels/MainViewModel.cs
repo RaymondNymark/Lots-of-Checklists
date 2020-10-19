@@ -9,16 +9,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Lots_of_Checklists.ViewModels;
+using Lots_of_Checklists.Core;
+using Autofac;
 
 namespace Lots_of_Checklists.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        #region Autofac
+        IChecklistRepository _checklistRepository;
+        IChecklistService _checklistService;
+        private static IContainer Container { get; set; }
+
+        IContainer container = ContainerConfig.Configure();
+        
+
+        #endregion
+
+
+
         #region View navigation
         // Essential navigation for the views within this application. Navigates
         // between the Outside a checklist viewmodel and the inside checklist
         // viewmodel.
-        private ViewModelBase _selectedViewModel = new OutsideViewModel();
+        private ViewModelBase _selectedViewModel = new OutsideViewModel(_checklistService);
 
         public ViewModelBase SelectedViewModel
         {
@@ -27,6 +41,35 @@ namespace Lots_of_Checklists.ViewModels
         }
         #endregion
 
+        #region Application wide ServiceAccess
+        // Explicit declaration of the container. It gets confused when used
+        // here otherwise.
+        //private Autofac.IContainer container = ContainerConfig.Configure();
+
+        //public void TestDebug()
+        //{
+        //    using (var scope = container.BeginLifetimeScope())
+        //    {
+        //        var app = scope.Resolve<IChecklistRepository>();
+        //        //app.CreateNewChecklist("Pre-skate checklist");
+        //    }
+        //}
+
+        #endregion
+        //private IChecklistService _checklistService;
+
+        public MainViewModel(IChecklistRepository checklistRepository, IChecklistService checklistService)
+        {
+            _checklistRepository = checklistRepository;
+            _checklistService = checklistService;
+
+
+            //var container = ContainerConfig.Configure();
+            //using (var scope = container.BeginLifetimeScope())
+            //{
+            //    var _checklistService = scope.Resolve<IChecklistService>();
+            //}
+        }
 
         #region Application wide ICommands
 
@@ -70,10 +113,10 @@ namespace Lots_of_Checklists.ViewModels
             {
                 return new DelegateCommand
                 {
-                    CanExecuteFunc = () => false,
+                    CanExecuteFunc = () => true,
                     CommandAction = () =>
                     {
-                        // New Checklist
+                        //TestDebug();
                     }
                 };
             }
@@ -116,7 +159,7 @@ namespace Lots_of_Checklists.ViewModels
                     CommandAction = () =>
                     {
                         Console.WriteLine("DebugCommandTwo executed.");
-                        SelectedViewModel = new OutsideViewModel();
+                        SelectedViewModel = new OutsideViewModel(_checklistService);
                     }
                 };
             }

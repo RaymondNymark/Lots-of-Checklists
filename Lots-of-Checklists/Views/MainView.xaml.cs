@@ -1,5 +1,6 @@
 ﻿using Lots_of_Checklists.ViewModels;
 using System.Windows;
+using Autofac;
 
 namespace Lots_of_Checklists.Views
 {
